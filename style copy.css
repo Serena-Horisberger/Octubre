@@ -1,0 +1,44 @@
+body {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 15px;
+	margin-top: 40px;
+	margin-left: 40px;
+}
+
+.info2 {
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 15px;
+	padding-left: 30px;
+	padding-right: 20px;
+	display: table;
+}
+.info {
+	padding-left: 30px;
+	padding-right: 20px;
+	display: table;
+}
+.info1 {
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: none;
+	display: table;
+	/*width: 100px*/
+}
+
+.separacion {
+	margin-left: 100px;
+}
+
+h3 {
+	display: inline;
+}
+
+.info5{
+	padding-left: 30px;
+	padding-top: none;
+	display: table;
+}
+.info3 {
+	padding-left: 30px;
+	display: table;
+}
