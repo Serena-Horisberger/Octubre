@@ -32,6 +32,19 @@ CMC7Reco(unsigned char* numero, int filas, int columnas, char* nombre, int seña
 var filas = 0;
 var columnas = 0;
 var señalTrace = 1;
+const COC1 = 0;
+const FC1 = 1;
+const RCC1 = 2;
+const CCC1 = 3;
+/*
+#define COC1 0  
+#define FC1 1  
+#define RCC1 2  
+#define CCC1 3
+*/
+
+
+
 let retornoParametrosC = [];
 
 console.log("activo");
@@ -96,9 +109,7 @@ function mostrarContenido(numeroOriginal,nombreArchivoTXT,filas,columnas,siOno) 
 
     let numeroConBordes = new Array(filas);
     for (var f = 0; f < filas; f++) {
-        for (var o = 0; o < columnas; o++) {
             numeroConBordes[f] = new Array(columnas);
-        }
     }
 
   //---------------------
@@ -120,14 +131,7 @@ function mostrarContenido(numeroOriginal,nombreArchivoTXT,filas,columnas,siOno) 
         console.log(numeroConBordes);
     }
   // agrego al numero 2 columnas a cada lado con ceros
-    /*var co = 0;
-    for(var i = 0; i < filas; i++){
-        if(numeroConBordes[numeroConBordes[i].length -1][co] < (columnas - 1)){
-            numeroConBordes[i][co] = "00" + numeroConBordes[i][co] + "00";
-            co +=1;
-        }
-    }
-    */
+
 
   //---------------------
 
@@ -142,31 +146,68 @@ function mostrarContenido(numeroOriginal,nombreArchivoTXT,filas,columnas,siOno) 
         console.log(numeroConBordes);
     }
 
-    let tablaFxC = new Array(filas);
-    var f2 = 0;
+  let tablaFxC;
+  tablaFxC = verificarYLimpiarTabla(numeroConBordes);
+
+  function verificarYLimpiarTabla(tablaFxC) {
+  const filas = tablaFxC.length;
+  const columnas = tablaFxC[0]?.length || 0;
+
+  let errores = [];
+
+  for (let f = 0; f < filas; f++) {
+    for (let c = 0; c < columnas; c++) {
+      const valor = tablaFxC[f][c];
+
+      // Verifica si el valor es undefined o vacío
+      if (valor === undefined || valor === '') {
+        errores.push({ fila: f, columna: c, valor });
+
+        // Si querés corregirlo automáticamente:
+        tablaFxC[f][c] = '0'; // o el valor que prefieras
+      }
+    }
+  }
+
+  if (errores.length > 0) {
+    console.warn("Se encontraron valores inválidos en la tabla:", errores);
+  } else {
+    console.log("La tabla está limpia y sin errores.");
+  }
+
+  return tablaFxC;
+}
+
+   
+    /* var f2 = 0;
     var c2 = 0;
-    for (var f = 0; f <= filas; f++) {
-    for (var c = 0; c <= columnas; c++) {
-        tablaFxC[f2] = new Array(columnas);
+    for (var f = 0; f <= filas1; f++) {
+    for (var c = 0; c <= columnas1; c++) {
+        tablaFxC[f2] = new Array(columnas1);
         tablaFxC[f2][c2] = numeroConBordes[f][c];
         f2 += 1;
         c2 += 1;
         }
-    }
+    }*/
 
     if (siOno == 1) {
         console.log(tablaFxC);
     }
 
   // TABLA DE MOVIMIENTO FIJO SOBRE EL NUMERO
+
+    var c1 = new Array();
     for (var i = 0; i < 5000; i++) {
-        c1[i] = new char[4]();
+        c1[i] = new Array(4);
         c1[i][COC1] = 0;
         c1[i][FC1] = 0;
         c1[i][RCC1] = 0;
         c1[i][CCC1] = 0;
     }
     c1 = movimientofijo(c1);
+
+
+
 
   // FIN
 } // fin funcion principal
